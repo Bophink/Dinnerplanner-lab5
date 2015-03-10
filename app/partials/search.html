@@ -1,34 +1,36 @@
 <!--We include the sidebar as it is shared across two screens. -->
-<ng-include src="'partials/header.html'" ></ng-include>
-<div class="row">
-	<div class="col-md-3">
-		<ng-include src="'partials/dinner-sidebar.html'" ng-controller="DinnerCtrl"></ng-include>
-	</div>
-	<div class="col-md-9">
-		<input type="search" ng-model="query" class="form-control"   placeholder="search for dishes here!" style="width:80%; float: left;"/>
-		<button ng-click="search(query)" id="search" class="btn" style="width: 20%; float: left;">
-			search
-		</button>
-		<p>{{status}}</p>
-		<div class="row">
-			<div ng-repeat="dish in dishes"class="col-md-3" style="padding: 20px 20px;">
-				<div class="courseThumb" style="background-image: url({{dish.ImageURL120}});">
-		    		<a href="#/dish/{{dish.RecipeID}}" style="heigth: 5%; width: 100%;" class="btn btn-primary">{{dish.Title}}</a>
-		   	 		<a ng-href="#/dish/{{dish.RecipeID}}">View more</a>
+<div id="search">
+	<ng-include src="'partials/header.html'" ></ng-include>
+	<div class="row">
+		<div class="col-md-3">
+			<ng-include src="'partials/dinner-sidebar.html'" ng-controller="DinnerCtrl"></ng-include>
+		</div>
+		<div class="col-md-9">
+			<input type="search" ng-model="query" class="form-control"   placeholder="search for dishes here!" style="width:80%; float: left;"/>
+			<button ng-click="search(query)" id="search" class="btn" style="width: 20%; float: left;">
+				search
+			</button>
+			<p>{{status}}</p>
+			<div class="row">
+				<div ng-repeat="dish in dishes" class="col-md-3" style="padding: 20px 20px;">
+					<div class="courseThumb" style="background-image: url({{dish.ImageURL120}});">
+			    		<a href="#/dish/{{dish.RecipeID}}" style="heigth: 5%; width: 100%;" class="btn btn-primary">{{dish.Title}}</a>
+			   	 		
+					</div>
+					
 				</div>
-				
 			</div>
+
+		</div>
+		<div id="Appetizer Roll-Ups" class="col-md-2" style="padding: 0px 0px; margin: 20px 20px;">
+
+			
+
 		</div>
 
-	</div>
-	<div id="Appetizer Roll-Ups" class="col-md-2" style="padding: 0px 0px; margin: 20px 20px;">
-
+		<!-- Här börjar det jag klistrade in -->
 		
-
 	</div>
-
-	<!-- Här börjar det jag klistrade in -->
-	
 </div>
 <!-- Här slutar det jag klistrade in-->
 
@@ -49,4 +51,4 @@
 
 
 <!-- TODO in Lab 5: Display the input box for search (you can ignore the type dropdown since BigOven does
-not support it in free version) and list all the dishes that match the search.
+not support it in free version) and list all the dishes that match the search.-->

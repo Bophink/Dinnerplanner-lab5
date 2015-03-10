@@ -1,39 +1,32 @@
 <!--We include the sidebar as it is shared across two screens. -->
-<ng-include src="'partials/header.html'" ></ng-include>
-<!--<ng-include src="'partials/dinner-sidebar.html'" ng-controller="DinnerCtrl"></ng-include>-->
+<div id="overview">
+	<ng-include src="'partials/header.html'" ></ng-include>
+	<!--<ng-include src="'partials/dinner-sidebar.html'" ng-controller="DinnerCtrl"></ng-include>-->
 
-<div id="DINNERSTATUS">
-	<div class="jumbotron" style="background-color: rgb(255,219,124); margin-bottom: 20px">
-		<h2 style="display: inline;">My dinner:  people</h2> <!-- HÄR SKA DET VARA INLÄGG AV ANTAL GÄSTER VIA EN VIEW -->
-		{{getNumberOfGuests()}}
-		<a href="#/search" style="heigth: 5%; width: 100%;" class="btn btn-primary">Go back and edit dinner</a>
-	</div>
-</div>
-
-
-<div ng-repeat="dishInMenu in FullMenu()" class="container"><!-- namn!-->
-	<div id="menu" class="row">
-		<img ng-src="{{dishInMenu.ImageURL120}}">
-			<a href="#/dish/{{dishInMenu.RecipeID}}" style="heigth: 5%; width: 100%;" class="btn btn-primary">{{dishInMenu.Title}}</a>
-		</img>
-	</div>
-</div>
-
-
-
-
-	<div id="buttonpart" class="row">
-  		<hr style="width: 80%; border-color: black; border-width: 3px; "/>
-  		<center>
-    		<button type="button" class="btn btn-default;">Print Full Recepie</button>
-  		</center>
-	</div>
-</div>
-<div id="menuView" class ="row">
-		<div id="menu">
+	<div id="DINNERSTATUS">
+		<div class="jumbotron" style="background-color: rgb(255,219,124); margin-bottom: 20px">
+			<h2 style="display: inline;">My dinner: {{getNumberOfGuests()}} people</h2> <!-- HÄR SKA DET VARA INLÄGG AV ANTAL GÄSTER VIA EN VIEW -->
+			
+			<a href="#/search" style="heigth: 5%; width: 100%;" class="btn btn-primary">Go back and edit dinner</a>
 		</div>
+	</div>
 
+	<div ng-repeat="dishInMenu in fullMenu()" class="col-md-3" style="padding: 20px 20px;">
+		<div class="courseThumb" style="background-image: url({{dishInMenu.ImageURL}});">
+    		<a href="#/dish/{{dishInMenu.RecipeID}}" style="heigth: 5%; width: 100%;" class="btn btn-primary">{{dishInMenu.Title}}</a>
+		</div>
+		
+	</div>
+
+
+
+
+	<div id="menuView" class ="row">
+			<div id="menu">
+			</div>
+
+	</div>
 </div>
 
 <!-- TODO in Lab 5: Display the input box for search (you can ignore the type dropdown since BigOven does
-not support it in free version) and list all the dishes that match the search.
+not support it in free version) and list all the dishes that match the search.-->
