@@ -3,13 +3,44 @@
 // dependency on any service you need. Angular will insure that the
 // service is created first time it is needed and then just reuse it
 // the next time.
-dinnerPlannerApp.factory('Dinner',function ($resource) {
+dinnerPlannerApp.factory('Dinner',function ($resource, $cookieStore) {
   
-var nrGuests = 3;
-  var menu = {"Appetizers":"", "Main Dish":"", "Desserts":""}; 
+  this.getDishAPI1 = $resource('http://api.bigoven.com/recipe/:id',{api_key:apiKey});
+ 
+  this.getDishSCAPI = function(dishId) {
+    var dish="";
+    var status = "Searching..."; 
+    this.getDishAPI1.get({id:dishId},function(data){ 
+      console.log(dishId);
+      dish=data;
+      menu[dish.Category] = dish;
+      console.log(menu);
+      status = "Showing " + data.Title;
+    },function(data){ 
+      status = "There was an error";
+      console.log(status);
+    }); 
+    
+  }
+  
+
+  apiarray = [];
+  var nrGuests = 3;
+  if ($cookieStore.get('nrGuests') != "") {
+    nrGuests = $cookieStore.get('nrGuests')
+  } 
+
+  var menu = {"Appetizers":"hej", "Main Dish":"", "Desserts":""};
+  ;
+  for (key in menu) {
+    if ($cookieStore.get(key) != undefined) {
+      console.log("Dags att köra en API på: "+$cookieStore.get(key));
+      this.getDishSCAPI($cookieStore.get(key));
+    }
+  
+  }
   //TODO Lab 2 implement the data structure that will hold number of guest
   // and selected dinner options for dinner menu
-
 
   //var currentDishId = "";
   var dishList = [];
@@ -17,24 +48,15 @@ var nrGuests = 3;
   var apiKey = "dvx6xnM6eJJ7D6eU5toZ9RnMtHN74Gye";
   var apiKey2 = "dvxF0CCPfnBJczzM0l3mACa6iROX43Py";
 
-  this.getDishList = function(){
-    //console.log(dishList);
-    return dishList;
-  }
+  
 
 
-  this.setFilterSearch = function(newFilter, newSearchText){
-    filter = newFilter;
-    searchText = newSearchText;
-    this.getAllDishes();
-
-  }
-  this.getDish = function(){
-    return currentDish;
-  }
   this.setNumberOfGuests = function(num) {
+    console.log("test"+$cookieStore.get("nrGuests"));
     if (num>0) {
-      nrGuests = num; 
+      nrGuests = num;
+      $cookieStore.put('nrGuests',nrGuests);
+      console.log("nr Guests i cookie är " + $cookieStore.get('nrGuests'))
       //console.log("changed nrG"); 
     }
   }
@@ -49,7 +71,7 @@ var nrGuests = 3;
     
   }
   this.setCurrentDish = function(newDish) {
-    console.log("currentdish ändras till: "+newDish);
+    //console.log("currentdish ändras till: "+newDish);
     currentDish = newDish;
 
   }
@@ -95,18 +117,18 @@ var nrGuests = 3;
   this.getDishPrice = function(obj) {
     var dish = obj;
     var dishPrice = 0;
-    console.log("getDishPrice körs");
+    //console.log("getDishPrice körs");
     try{
-      console.log("går in i try");
+      //console.log("går in i try");
       for (i in dish.Ingredients) {
         dishPrice += dish.Ingredients[i].MetricQuantity*nrGuests;
       }
       dishPrice = +(dishPrice.toFixed(2));
-      console.log("går förbi toFixed");
+      //console.log("går förbi toFixed");
       return dishPrice;
     }catch(e){
-      console.log("går in i catch");
-      console.log("currentdish är inget dish-objekt");
+      //console.log("går in i catch");
+      //console.log("currentdish är inget dish-objekt");
     }
 
   }
@@ -134,7 +156,8 @@ var nrGuests = 3;
   //it is removed from the menu and the new one added.
   this.addDishToMenu = function(obj) {
     var type = obj.Category;
-    console.log(type);
+    $cookieStore.put(type, obj.RecipeID);
+    //console.log(type);
     if (menu[type] != "") {
       //this.removeDishFromMenu(menu[type]);
       menu[type] = obj;
@@ -153,9 +176,6 @@ var nrGuests = 3;
   //function that returns all dishes of specific type (i.e. "starter", "main dish" or "dessert")
   //you can use the filter argument to filter out the dish by name or ingredient (use for search)
   //if you don't pass any filter all the dishes will be returned
-  this.getAllDishes = $resource('http://api.bigoven.com/recipes',{pg:1,rpp:25,api_key:apiKey});
-
-  this.getDishAPI = $resource('http://api.bigoven.com/recipe/:id',{api_key:apiKey});
 
   //function that returns a dish of specific ID
 
@@ -167,7 +187,9 @@ var nrGuests = 3;
   // a bit to take the advantage of Angular resource service
   // check lab 5 instructions for details
 
-
+this.getAllDishes = $resource('http://api.bigoven.com/recipes',{pg:1,rpp:25,api_key:apiKey});
+this.getDishAPI = $resource('http://api.bigoven.com/recipe/:id',{api_key:apiKey});
+ 
 
 
 

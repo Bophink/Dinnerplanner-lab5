@@ -33,7 +33,7 @@ dinnerPlannerApp.controller('DishCtrl', function ($scope,$routeParams,Dinner) {
 	}
 
 	$scope.addDishToMenu = function(){
-		console.log("lägger till i menu");
+		//console.log("lägger till i menu");
 		return Dinner.addDishToMenu($scope.dish);
 	}
 
