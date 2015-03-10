@@ -52,6 +52,10 @@ dinnerPlannerApp.config(['$routeProvider',
         templateUrl: 'partials/overview.html',
         controller: 'OvCtrl'
       }).
+      when('/print', {
+        templateUrl: 'partials/print.html',
+        controller: 'PrintCtrl'
+      }).
       // TODO in Lab 5: add more conditions for the last two screens (overview and preparation)
       otherwise({
         redirectTo: '/home'

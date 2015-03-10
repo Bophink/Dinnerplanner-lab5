@@ -1,9 +1,31 @@
 <!-- We include the sidebar as it is shared across two screens. -->
 <div id="dish">
 	<ng-include src="'partials/header.html'" ></ng-include>
+<<<<<<< HEAD
 	<div class="row">
 		<div class="col-md-3">
 			<ng-include src="'partials/dinner-sidebar.html'" ng-controller="DinnerCtrl"></ng-include>
+=======
+	<ng-include src="'partials/dinner-sidebar.html'" ng-controller="DinnerCtrl"></ng-include>
+
+	{{dish.Title}}
+
+	<p>{{status}}</p>
+
+	<div id="SINGLE">
+		<div id="loadingOverlay"></div>
+		<div id="scview" class="col-md-5">
+			<div id="NameImg">
+				<h3>{{dish.Title}}</h3>
+				<img ng-src="{{dish.ImageURL}}"/>
+			 	<p style="padding: 5px 5px;">{{dish.Description}}
+				</p>
+			</div>
+			<a href="#/search" class="btn btn-primary">Back to Select Dish</a>
+			
+			<h2>Preparations</h2>
+			<p>{{dish.Instructions}}</p>
+>>>>>>> 6e1f0203536320551249db3824db38efb24469fc
 		</div>
 		<div id="SINGLE" class="col-md-9 row">
 			<div id="loadingOverlay"></div>
