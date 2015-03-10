@@ -14,7 +14,7 @@ dinnerPlannerApp.controller('DishCtrl', function ($scope,$routeParams,Dinner) {
 		Dinner.getDishAPI.get({id:dishId},function(data){ 
 			console.log(dishId);
 			$scope.dish=data;
-			console.log(data);
+			console.log("test: "+data.Category);
 			$scope.status = "Showing " + data.Title;
 		},function(data){ 
 			$scope.status = "There was an error"; 

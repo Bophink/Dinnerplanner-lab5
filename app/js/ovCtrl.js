@@ -1,7 +1,10 @@
 dinnerPlannerApp.controller('OvCtrl', function ($scope,Dinner) {
 
   $scope.numberOfGuests = Dinner.getNumberOfGuests();
-  $scope.fullMenu = function() {
+  $scope.fullMenu = Dinner.getFullMenu();
+  $scope.getFullMenu = function() {
+    console.log("SKICKAS UT I OvCtrl!!");
+    console.log(Dinner.getFullMenu());
   	return Dinner.getFullMenu();
   }
 

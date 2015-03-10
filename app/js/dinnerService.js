@@ -3,50 +3,18 @@
 // dependency on any service you need. Angular will insure that the
 // service is created first time it is needed and then just reuse it
 // the next time.
-dinnerPlannerApp.factory('Dinner',function ($resource, $cookieStore) {
+dinnerPlannerApp.factory('Dinner',function ($resource, $cookieStore) { 
   
-  this.getDishAPI1 = $resource('http://api.bigoven.com/recipe/:id',{api_key:apiKey});
- 
-  this.getDishSCAPI = function(dishId) {
-    var dish="";
-    var status = "Searching..."; 
-    this.getDishAPI1.get({id:dishId},function(data){ 
-      console.log(dishId);
-      dish=data;
-      menu[dish.Category] = dish;
-      console.log(menu);
-      status = "Showing " + data.Title;
-    },function(data){ 
-      status = "There was an error";
-      console.log(status);
-    }); 
-    
-  }
-  
-
-  apiarray = [];
   var nrGuests = 3;
   if ($cookieStore.get('nrGuests') != "") {
     nrGuests = $cookieStore.get('nrGuests')
   } 
 
-  var menu = {"Appetizers":"hej", "Main Dish":"", "Desserts":""};
-  ;
-  for (key in menu) {
-    if ($cookieStore.get(key) != undefined) {
-      console.log("Dags att köra en API på: "+$cookieStore.get(key));
-      this.getDishSCAPI($cookieStore.get(key));
-    }
-  
-  }
-  //TODO Lab 2 implement the data structure that will hold number of guest
-  // and selected dinner options for dinner menu
+  var menu = {"Appetizers":"", "Main Dish":"", "Desserts":""};
 
-  //var currentDishId = "";
-  var dishList = [];
 
-  var apiKey = "dvx6xnM6eJJ7D6eU5toZ9RnMtHN74Gye";
-  var apiKey2 = "dvxF0CCPfnBJczzM0l3mACa6iROX43Py";
+  var apiKey2 = "dvx6xnM6eJJ7D6eU5toZ9RnMtHN74Gye";
+  var apiKey = "dvxF0CCPfnBJczzM0l3mACa6iROX43Py";
 
   
 
@@ -171,6 +139,7 @@ dinnerPlannerApp.factory('Dinner',function ($resource, $cookieStore) {
   this.removeDishFromMenu = function(type) {
     console.log("tar bort: "+type);
     menu[type] = "";
+    $cookieStore.remove(type);
   }
 
   //function that returns all dishes of specific type (i.e. "starter", "main dish" or "dessert")

@@ -13,7 +13,7 @@
 
 	<div  id="courses" class="row row-centered" style="padding: 20px;">
 
-		<div  ng-repeat="dishInMenu in fullMenu()" class="col-md-2" style="padding: 0px 0px; margin: 20px 20px;">
+		<div  ng-repeat="dishInMenu in getFullMenu()" class="col-md-2" style="padding: 0px 0px; margin: 20px 20px;">
 			<div class="courseThumb" style="background-image: url({{dishInMenu.ImageURL}});">
 		    	<a href="#/dish/{{dishInMenu.RecipeID}}" style="heigth: 5%; width: 100%;" class="btn btn-primary">{{dishInMenu.Title}}</a>
 			</div>
