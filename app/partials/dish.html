@@ -1,46 +1,44 @@
 <!-- We include the sidebar as it is shared across two screens. -->
 <div id="dish">
 	<ng-include src="'partials/header.html'" ></ng-include>
-	<ng-include src="'partials/dinner-sidebar.html'" ng-controller="DinnerCtrl"></ng-include>
-
-	{{dish.Title}}
-
-	<p>{{status}}</p>
-
-	<div id="SINGLE">
-		<div id="loadingOverlay"></div>
-		<div id="scview" class="col-md-5">
-			<div id="NameImg">
-				<h3>{{dish.Title}}</h3>
-				<img ng-src="{{dish.ImageURL}}">
-			 	<p style="padding: 5px 5px;">{{dish.Description}}
-				</p>
+	<div class="row">
+		<div class="col-md-3">
+			<ng-include src="'partials/dinner-sidebar.html'" ng-controller="DinnerCtrl"></ng-include>
+		</div>
+		<div id="SINGLE" class="col-md-9 row">
+			<div id="loadingOverlay"></div>
+			<div id="scview" class="col-md-6">
+				<div id="NameImg">
+					<h3>{{dish.Title}}</h3>
+					<img ng-src="http://marknadskompetens.se/projekt/imageresize.php?link={{dish.ImageURL}}&newWidth=350"/>
+				 	<p style="padding: 5px 5px;">{{dish.Description}}
+					</p>
+				</div>
+				<a href="#/search" class="btn btn-primary">Back to Select Dish</a>
+				
+				<h2>Preparations</h2>
+				<p>{{dish.Instructions}}</p>
 			</div>
-			<a href="#/search" class="btn btn-primary">Back to Select Dish</a>
-			
-			<h2>Preparations</h2>
-			<p>{{dish.Instructions}}</p>
-		</div>
-		<div id="ingredview" class="col-md-5" style="background-color: rgb(242,171,51); padding: 10px 10px;">
-			<h4><u> INGREDIENTS FOR {{getNumberOfGuests()}} PEOPLE</u>
-			</h4>
-			<table class="table">
-					<tr ng-repeat="ingredient in dish.Ingredients">
-						<td>{{ingredient.MetricQuantity * getNumberOfGuests()}} {{ingredient.MetricUnit}}</td>
-						<td>{{ingredient.Name}}</td>
-						<td>SEK</td>
-						<td>{{ingredient.MetricQuantity * getNumberOfGuests()}}</td>
-					</tr>
-					<tr>
-						<td colspan="2">
-							<a href="#/search" ng-click="addDishToMenu(dish)" class="btn btn-primary">Confirm Dish</a><!-- Lägg till så den lägger till rätten också-->
-						</td>
-						<td>SEK</td>
-					    <td>{{getDishPrice()}}</td>
-			  		</tr>
-			</table> 	
-		</div>
-			
+			<div id="ingredview" class="col-md-6" style="background-color: rgb(242,171,51); padding: 10px 10px;">
+				<h4><u> INGREDIENTS FOR {{getNumberOfGuests()}} PEOPLE</u>
+				</h4>
+				<table class="table">
+						<tr ng-repeat="ingredient in dish.Ingredients">
+							<td>{{ingredient.MetricQuantity * getNumberOfGuests()}} {{ingredient.MetricUnit}}</td>
+							<td>{{ingredient.Name}}</td>
+							<td>SEK</td>
+							<td>{{ingredient.MetricQuantity * getNumberOfGuests()}}</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<a href="#/search" ng-click="addDishToMenu(dish)" class="btn btn-primary">Confirm Dish</a><!-- Lägg till så den lägger till rätten också-->
+							</td>
+							<td>SEK</td>
+						    <td>{{getDishPrice()}}</td>
+				  		</tr>
+				</table> 	
+			</div>
+				
 	</div>
 </div>
 

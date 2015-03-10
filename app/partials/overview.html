@@ -11,12 +11,30 @@
 		</div>
 	</div>
 
-	<div ng-repeat="dishInMenu in fullMenu()" class="col-md-3" style="padding: 20px 20px;">
-		<div class="courseThumb" style="background-image: url({{dishInMenu.ImageURL}});">
-    		<a href="#/dish/{{dishInMenu.RecipeID}}" style="heigth: 5%; width: 100%;" class="btn btn-primary">{{dishInMenu.Title}}</a>
+	<div  id="courses" class="row row-centered" style="padding: 20px;">
+
+		<div  ng-repeat="dishInMenu in fullMenu()" class="col-md-2" style="padding: 0px 0px; margin: 20px 20px;">
+			<div class="courseThumb" style="background-image: url({{dishInMenu.ImageURL}});">
+		    	<a href="#/dish/{{dishInMenu.RecipeID}}" style="heigth: 5%; width: 100%;" class="btn btn-primary">{{dishInMenu.Title}}</a>
+			</div>
+			<h3 class="pull-right" style="color: red; pull-right;">{{getDishPrice(dishInMenu)}} SEK</h3>
+			
 		</div>
 		
-	</div>
+
+	    
+	    
+	        
+	    <div id="verticalLine" class="col-md-2" style="border-left: 3px solid #000000; height: 250px; padding-top: 100px">
+	    	<h3>Total:</h3>
+			<h3 style="color: red">
+				{{getTotalMenuPrice()}} SEK
+			</h3>
+	    </div>
+    </div>
+   
+
+</div>
 
 
 
