@@ -25,7 +25,7 @@ dinnerPlannerApp.controller('SearchCtrl', function ($scope,Dinner) {
 		return Dinner.addDishToMenu(obj);
 	}
 	
-
+	$scope.search("");
 
 
 
