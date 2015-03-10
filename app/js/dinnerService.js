@@ -12,12 +12,6 @@ var nrGuests = 3;
 
 
   //var currentDishId = "";
-  var currentDish = "herj";
-  var id = 178171;
-
-  var filter = "Appetizer";
-  var query = "hejhej";
-  
   var dishList = [];
 
   var apiKey = "dvx6xnM6eJJ7D6eU5toZ9RnMtHN74Gye";
