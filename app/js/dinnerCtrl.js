@@ -11,7 +11,7 @@ dinnerPlannerApp.controller('DinnerCtrl', function ($scope,Dinner,$cookieStore) 
     $scope.status = "Searching..."; 
     Dinner.getDishAPI.get({id:dishId},function(data){ 
       console.log(dishId);
-      var cat = data.Category;
+      //var cat = data.Category;
       //$scope.fullMenu[cat]=data;
       Dinner.addDishToMenu(data);
       console.log("test: "+data.Category);

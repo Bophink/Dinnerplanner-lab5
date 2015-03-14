@@ -6,7 +6,7 @@
 dinnerPlannerApp.factory('Dinner',function ($resource, $cookieStore) { 
   
   var nrGuests = 3;
-  if ($cookieStore.get('nrGuests') != "") {
+  if ($cookieStore.get('nrGuests') != undefined) {
     nrGuests = $cookieStore.get('nrGuests')
   } 
 
